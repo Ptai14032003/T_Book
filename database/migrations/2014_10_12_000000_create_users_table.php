@@ -22,6 +22,7 @@ return new class extends Migration
             $table->tinyInteger('gender');
             $table->tinyInteger('role')->default(0);
             $table->string('image');
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });

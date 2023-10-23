@@ -132,7 +132,6 @@ body{
     background-color: #fff;
 }
 
-
 /* show menu on hover */
 .menu li:hover > .submenu{
     display: block;
@@ -194,9 +193,11 @@ body{
     width: 100%;
     left: 0;
  }
- .head-02 .right {
+
+.head-02 .right {
     display: flex;
- }
+}
+
  .head-02 .right button {
     height: 100%;
     width: 50px;
@@ -209,6 +210,7 @@ body{
 
  .offconvas {
     display: none;
+    
  }
  .offconvas.active {
     display: block;
@@ -231,6 +233,7 @@ body{
     background-color: #fff;
     height: 100vh;
     box-sizing: border-box;
+    z-index: 1;
  }
  .offconvas .content::-webkit-scrollbar {
     display: none;
@@ -292,6 +295,7 @@ body{
 }
 .content .menu .submenu_mobile{
     padding: 0;
+    padding-left: 2rem;
     display: none;
 }
 .content .menu .submenu_mobile1{

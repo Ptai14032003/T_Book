@@ -18,7 +18,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="logo col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                <a href="#" class="navbar-brand">
+                                <a href="{{ route('home') }}" class="navbar-brand">
                                     <img src="{{ asset('images/download.png') }}" alt="">
                                     <span class="logo-txt">T-Book</span>
                                 </a>
@@ -48,8 +48,20 @@
                                         Tài Khoản
                                     </a>
                                     <ul class="menu_user">
-                                        <li><a href="{{ route('register') }}"><i class="fa-solid fa-registered"></i>Đăng Ký</a></li>
-                                        <li><a href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket"></i>Đăng Nhập</a></li>
+                                        @if (Auth::user())
+                                            @if (Auth::user()->role == 0)
+                                                <li><a href="{{ route('logout') }}" onclick="return confirm('Bạn có chắc muốn đăng xuất?')"><i class="fa-solid fa-right-from-bracket"></i>Đăng Xuất</a></li>
+                                                <li><a href="{{ route('profile') }}"><i class="fa-solid fa-user"></i>Profile</a></li>
+                                            @else
+                                                <li><a href="{{ route('logout') }}" onclick="return confirm('Bạn có chắc muốn đăng xuất?')"><i class="fa-solid fa-right-from-bracket"></i>Đăng Xuất</a></li>
+                                                <li><a href=""><i class="fa-solid fa-user"></i>Profile</a></li>
+                                                <li><a href="{{ route('admin') }}"><i class="fa-solid fa-people-roof"></i>Trang Admin</a></li>
+                                            @endif
+                                            
+                                        @else
+                                            <li><a href="{{ route('register') }}"><i class="fa-solid fa-registered"></i>Đăng Ký</a></li>
+                                            <li><a href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket"></i>Đăng Nhập</a></li>
+                                        @endif
                                     </ul>
                                 </div>
                                 <div class="mobile-header">
@@ -145,25 +157,30 @@
                         <div class="divider"></div>
                         <li>
                             <a href="#">Categories</a>
-                            <ul class="">
-                                <li>
-                                    <a href="#">Truyện tranh</a>
-                                    <ul class="submenu_mobile">
-                                        <li>
-                                            <a href="#">haha</a>
+                            <ul class="submenu_mobile">
+                                @foreach ($categories as $category)
+                                    <li>
+                                        <a href="#">{{ $category->category_name }}</a>
+                                        @if (!empty($category->subcategory))  {{-- Nếu tồn tại danh mục con thì in ra --}}
                                             <ul class="submenu_mobile1">
-                                                <li>
-                                                    <a href="#">haha</a>
-                                                </li>
-                                                <li><a href="#">haha</a></li>
-                                                <li><a href="#">haha</a></li>
+                                                @foreach ($category->subcategory as $subcategory)
+                                                    <li>
+                                                        <a href="#">{{ $subcategories[$subcategory][0]['category_name'] }}</a> {{-- mảng $subcategories chứa id $key=id danh mục $value=Thông tin danh mục $value là 1 mảng--}}
+                                                        @if (!empty($subcate1_id[$subcategory]))
+                                                            <ul class="submenu_mobile1">
+                                                                @foreach ($subcate1_id[$subcategory] as $subcate_id)
+                                                                    <li>
+                                                                        <a href="#">{{ $subcategories1[$subcate_id][0]['category_name'] }}</a>{{-- mảng $subcategories1 chứa id $key=id danh mục $value=Thông tin danh mục  $value là 1 mảng--}}
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
+                                                    </li>
+                                                @endforeach
                                             </ul>
-                                        </li>
-                                        <li><a href="#">haha</a></li>
-                                        <li><a href="#">haha</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Văn Học</a></li>
+                                        @endif
+                                    </li>
+                                @endforeach
                             </ul>
                         </li>
                         <li><a href="#">sports</a></li>

@@ -16,15 +16,15 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <a href="#" class="logo">
-            <img style="height: 100px; width: 100px;" src="images/download.png" alt="">
+            <img style="height: 100px; width: 100px;" src="{{ asset('images/download.png') }}" alt="">
         </a>
         <ul class="side-menu">
             <li class="active"><a href="#"><i class='bx bxs-dashboard'></i>Dashboard</a></li>
-            <li><a href="{{ url('users') }}"><i class='bx bx-group'></i>Users</a></li>
-            <li><a href="{{ url('categories') }}"><i class='bx bx-category'></i>Categories</a></li>
-            <li><a href="{{ url('books') }}"><i class='bx bx-book-open'></i>Books</a></li>
-            <li><a href="{{ url('publishers') }}"><i class='bx bx-buildings'></i>Publishers</a></li>
-            <li><a href="{{ url('authors') }}"><i class='bx bx-user'></i>Authors</a></li>
+            <li><a href="{{ url('/admin/users') }}"><i class='bx bx-group'></i>Users</a></li>
+            <li><a href="{{ url('/admin/categories') }}"><i class='bx bx-category'></i>Categories</a></li>
+            <li><a href="{{ url('/admin/books') }}"><i class='bx bx-book-open'></i>Books</a></li>
+            <li><a href="{{ url('/admin/publishers') }}"><i class='bx bx-buildings'></i>Publishers</a></li>
+            <li><a href="{{ url('/admin/authors') }}"><i class='bx bx-user'></i>Authors</a></li>
             <li><a href="#"><i class='bx bx-money-withdraw'></i>Orders</a></li>
             <li><a href="#"><i class='bx bx-comment'></i>Reviews</a></li>
             <li><a href="{{ url('promotions') }}"><i class='bx bxs-discount'></i>Promotions</a></li>
@@ -32,7 +32,7 @@
         </ul>
         <ul class="side-menu">
             <li>
-                <a href="#" class="logout">
+                <a href="{{ route('logout') }}" class="logout">
                     <i class='bx bx-log-out-circle'></i>
                     Logout
                 </a>
