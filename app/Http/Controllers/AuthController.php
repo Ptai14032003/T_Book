@@ -76,16 +76,16 @@ class AuthController extends Controller
     public function update_Avatar(Request $request)
     {
         if ($request->isMethod('POST')) {
-
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $resultDL = Storage::delete('/public/' . Auth::user()->image);
-                if ($resultDL) {
+                if ($resultDL || Auth::user()->image === '') {
                     $image = uploadFile('image', $request->file('image'));
                 } else {
                     $image = Auth::user()->image;
                 }
             }
-            $img_ud = DB::table('users')->where('id', '=', Auth::user()->id)->update(['image' => $image]);
+            $img_ud = DB::table('users')->where('id', Auth::user()->id)->update(['image' => $image]);
+
             if ($img_ud) {
                 Session::flash('success', 'Cập nhật ảnh đại diện thành công');
                 return redirect()->route('profile');

@@ -20,7 +20,7 @@
             </div>
             <div class="col-lg-6 col-sm-12">
                 <label for="" class="form-label">Promotion Price</label>
-                <input type="text" name="promotion_price" class="form-control">
+                <input type="text" name="promotion_price" class="form-control" value="0">
                 <span class="@error('promotion_price') is-valid  @enderror" style="color: red" >{{ $errors->first('promotion_price') }}</span>
 
             </div>

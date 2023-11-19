@@ -1,6 +1,7 @@
 @extends('templates.layout_admin')
 @section('content')
-@if (Session::has('success'))
+<div class="content_admin">
+    @if (Session::has('success'))
     <strong style="color: green">{{ Session::get('success') }}</strong> <br>
 @endif
 <a href="{{ route('add_book') }}" class="btn btn-outline-primary">Add Book</a>
@@ -44,4 +45,6 @@
             @endforeach
         </tbody>
     </table>
+    {{  $books->links()  }} 
+</div>
 @endsection

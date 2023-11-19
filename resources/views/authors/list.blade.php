@@ -1,9 +1,10 @@
 @extends('templates.layout_admin')
 @section('content')
-@if (Session::has('success'))
-    <strong style="color: green">{{ Session::get('success') }}</strong> <br>
-@endif
-<a href="{{ route('add_author') }}" class="btn btn-outline-primary">Add Author</a>
+<div class="content_admin">
+    @if (Session::has('success'))
+        <strong style="color: green">{{ Session::get('success') }}</strong> <br>
+    @endif
+    <a href="{{ route('add_author') }}" class="btn btn-outline-primary">Add Author</a>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -27,4 +28,7 @@
             @endforeach
         </tbody>
     </table>
+    {{ $authors->links() }}
+</div>
+
 @endsection

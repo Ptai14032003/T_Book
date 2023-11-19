@@ -26,7 +26,7 @@
                         <form class="form" id = "form" action="{{ route('update_avatar') }}" enctype="multipart/form-data" method="post">
                             @csrf
                             <div class="upload">
-                                <img id="image" src="{{ Auth::user()->image ? Storage::url(Auth::user()->image): "https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" }}" alt="your image" class="img-fluid"/>            
+                                <img id="image"  src="{{ Auth::user()->image ? Storage::url(Auth::user()->image): "https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" }}" alt="your image" class="img-fluid"/>            
                       
                               <div class="rightRound" id = "upload">
                                 <input type="file" name="image" id = "fileImg" accept="image/*">

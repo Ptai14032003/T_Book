@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Book extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $table = 'books';
     protected $fillable = [
         'book_title',
@@ -21,4 +21,21 @@ class Book extends Model
         'description',
         'publisher_id'
     ];
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'book_id');
+    }
+    public function publishers()
+    {
+        return $this->hasMany(Publisher::class, 'publisher_id');
+    }
+    public function authors()
+    {
+        return $this->belongsToMany(Author::class, 'participates', 'book_id', 'author_id');
+    
+    }
+    public function category(){
+        return $this->hasMany(Category::class, 'cate_id');
+    }
 }

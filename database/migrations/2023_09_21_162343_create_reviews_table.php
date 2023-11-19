@@ -20,7 +20,6 @@ return new class extends Migration
             $table->timestamps();
             $table->foreign('book_id')->references('id')->on('books');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->softDeletes();
         });
     }
 

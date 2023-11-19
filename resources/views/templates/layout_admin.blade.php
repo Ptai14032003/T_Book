@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+    <script src="https://kit.fontawesome.com/07a69f92d2.js" crossorigin="anonymous"></script>
     <title>Admin T-Book</title>
 </head>
 
@@ -15,20 +16,20 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <a href="#" class="logo">
+        <a href="{{ route('home') }}" class="logo">
             <img style="height: 100px; width: 100px;" src="{{ asset('images/download.png') }}" alt="">
         </a>
         <ul class="side-menu">
-            <li class="active"><a href="#"><i class='bx bxs-dashboard'></i>Dashboard</a></li>
+            <li class="active"><a href="{{ route('admin') }}"><i class='bx bxs-dashboard'></i>Dashboard</a></li>
             <li><a href="{{ url('/admin/users') }}"><i class='bx bx-group'></i>Users</a></li>
             <li><a href="{{ url('/admin/categories') }}"><i class='bx bx-category'></i>Categories</a></li>
             <li><a href="{{ url('/admin/books') }}"><i class='bx bx-book-open'></i>Books</a></li>
             <li><a href="{{ url('/admin/publishers') }}"><i class='bx bx-buildings'></i>Publishers</a></li>
             <li><a href="{{ url('/admin/authors') }}"><i class='bx bx-user'></i>Authors</a></li>
-            <li><a href="#"><i class='bx bx-money-withdraw'></i>Orders</a></li>
-            <li><a href="#"><i class='bx bx-comment'></i>Reviews</a></li>
-            <li><a href="{{ url('promotions') }}"><i class='bx bxs-discount'></i>Promotions</a></li>
-            <li><a href="#"><i class='bx bx-scatter-chart'></i>Statistics</a></li>
+            <li><a href="{{ url('/admin/orders') }}"><i class='bx bx-money-withdraw'></i>Orders</a></li>
+            <li><a href="{{ url('/admin/reviews') }}"><i class='bx bx-comment'></i>Reviews</a></li>
+            <li><a href="{{ url('/admin/promotions') }}"><i class='bx bxs-discount'></i>Promotions</a></li>
+            {{-- <li><a href="#"><i class='bx bx-scatter-chart'></i>Statistics</a></li> --}}
         </ul>
         <ul class="side-menu">
             <li>
@@ -44,7 +45,7 @@
     <!-- Main Content -->
     <div class="content">
         <!-- Navbar -->
-        <nav>
+        <nav class="nav-admin">
             <i class='bx bx-menu'></i>
             <form action="#">
                 <div class="form-input">
@@ -59,7 +60,7 @@
                 <span class="count">12</span>
             </a> -->
             <a href="#" class="profile">
-                <img src="images/download.png">
+                <img src="{{ Storage::url(Auth::user()->image) }}" alt>
             </a>
         </nav>
 

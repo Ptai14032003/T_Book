@@ -2,10 +2,23 @@ const sideLinks = document.querySelectorAll('.sidebar .side-menu li a:not(.logou
 
 sideLinks.forEach(item => {
     const li = item.parentElement;
+    const currentURL = window.location.href;
+    // So sánh địa chỉ URL của thẻ liên kết với địa chỉ URL của trang hiện tại
+    if (item.href === currentURL) {
+        // Nếu trùng khớp, thêm class active cho thẻ li cha
+        li.classList.add('active');
+    } else {
+        // Nếu không trùng khớp, xóa class active khỏi thẻ li cha
+        li.classList.remove('active');
+    }
+
+    // Thêm sự kiện click cho thẻ liên kết
     item.addEventListener('click', () => {
+        // Xóa class active khỏi tất cả các thẻ li cha
         sideLinks.forEach(i => {
             i.parentElement.classList.remove('active');
         })
+        // Thêm class active cho thẻ li cha của thẻ liên kết được click
         li.classList.add('active');
     })
 });

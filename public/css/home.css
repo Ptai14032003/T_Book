@@ -117,7 +117,9 @@ body{
     z-index: 1;
     background-color: #fff;
 }
-
+.submenu li{
+    position: relative;
+}
 /* submenu level 2 style */
 
 .submenu2{
@@ -245,9 +247,6 @@ body{
     justify-content: center;
  }
 
- .offconvas .content .menu li {
-    list-style-type: none;
- }
  .offconvas .content .menu .divider {
     height: 1px;
     width: 100%;
@@ -255,14 +254,28 @@ body{
     margin-top: 6px;
     background-color: #dcdcdc;
  }
- .offconvas .content .menu li a {
-    display: block;
-    width: 100%;
+
+ .offconvas .content .menu li {
+    list-style-type: none;
+    display: inline-block;
+    width: 100% !important;
+
+ }
+ .offconvas .content .menu li i{
+    margin-right: 10px ;
+    font-size: 20px !important;
+ }
+ .offconvas .content .menu li a{
     padding: 10px 0px;
     text-transform: capitalize;
-    font-size: 15px;
+    font-size: 17px;
     text-decoration: none;
     color: #555;
+ }
+ .offconvas .content .menu li i.fa-chevron-right{
+    margin-left: 10px;
+    font-size: 12px !important;
+    color: gainsboro;
  }
  .offconvas .content .social-icons {
     display: flex;
@@ -300,10 +313,11 @@ body{
 }
 .content .menu .submenu_mobile1{
     display: none;
-}
+} 
 .content .menu li:hover > .submenu_mobile{
     display: block;
 }
+
 .content .menu .submenu_mobile li:hover > .submenu_mobile1{
     display: block;
 }
@@ -480,6 +494,7 @@ body{
         width: calc((100% - 20px)) !important;
         margin: 0 10px;
     }
+
 }
 
 
@@ -499,7 +514,7 @@ body{
     width: 100%;
     height: 50px;
     text-align: center;
-     background: linear-gradient(to right, #f2709c, #ff9472); 
+    background: linear-gradient(to right, #f2709c, #ff9472); 
     border-radius: 30px;
     font-size: 30px;
     color: #fff !important;
@@ -507,6 +522,7 @@ body{
 }
 .product_item_1{
     width: calc((100% - 80px)/4);
+    position: relative;
     cursor: pointer;
     transition: .4s;
     background: #fff;
@@ -641,3 +657,272 @@ opacity: 0.2;
 opacity: 1;
 }
   
+
+
+/* cart */
+.carts{
+    padding: 20px;
+    margin-top: 50px;
+    background-color: #fff;
+}
+.carts td{
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+}
+.carts th{
+    text-align: center;
+    vertical-align: middle;
+    font-size: 23px;
+}
+.carts img{
+    height:150px;
+    width: 150px;
+}
+.wrapper{
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+  
+}
+.wrapper .btns{
+    color: #000;
+    padding: 5px;
+    width: 50px !important;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    height: 60px;
+    border: solid 1px gainsboro;
+}
+.wrapper a:hover > .btns{
+    color: #f2709c;
+}
+.wrapper .num{
+    width: 50px;
+    text-align: center;
+    border: solid 1px gainsboro;
+    font-size: 25px;
+    font-weight: 600;
+    height: 60px !important;
+}
+.check-box{
+    width: 20px !important;
+    height: 20px !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .carts img{
+        height:100px;
+        width: 100px;
+    }
+
+    .wrapper .btns{
+        padding: 5px;
+        width: 30px !important;
+        height: 40px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        border: solid 1px gainsboro;
+    }
+    .wrapper a:hover > .btns{
+        color: #f2709c;
+    }
+    .wrapper .num{
+        width: 30px;
+        text-align: center;
+        border: solid 1px gainsboro;
+        font-size: 18px;
+        font-weight: 600;
+        height: 40px !important;
+    }
+    .confirm{
+        height: 700px !important;
+    }
+}
+@media only screen and (max-width: 992px) {
+    .confirm{
+        height: 600px !important;
+    }
+}
+/* confirm */
+
+.confirm{
+    margin-top: 50px;
+    background-color:#fff;
+    width: 100%;
+    height: 500px;
+    padding: 50px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.confirm span{
+    font-size:30px;
+    text-align: center !important;
+}
+.confirm p{
+    font-size:25px;
+    margin-top: 15px;
+}
+.confirm img{
+    width: 100%;
+    height: 250px;
+}
+
+
+/* hiệu ứng thêm ảnh vào giỏ */
+
+.img-product-fly{
+    position: absolute;
+    z-index: 9999999;
+    
+    width: 75px;
+    height: 75px;
+    border: solid 1px red;
+    border-radius: 50%;
+    transition: all 1s ease-in-out;
+}
+
+#cart{
+    position: relative;
+}
+/* hiển thị tổng sản phẩm trong giỏ hàng */
+.total_cart{
+    position: absolute;
+    top: -15px;
+    left: 55%;
+    font-size: 18px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border: solid 1px red;
+    background-color: red;
+    opacity: 0.7;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+}
+
+
+/* trang đơn hàng của tôi */
+.my_order{
+    background-color: #fff;
+    min-height: 70vh;
+    margin-top: 25px;
+    padding: 20px;
+}
+.my_order span{
+    font-size:20px;
+}
+.my_order table{
+    text-align:center;
+}
+
+.info{
+    padding: 20px;
+    background-color: #fff;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-radius: 50px;
+}
+.info h4{
+    font-weight: bold;
+}
+
+/* footer */
+footer{
+    width: 100%;
+    background: #fff;
+    margin-top: 50px;
+}
+
+footer .footer_main{
+    width: 100%;
+}
+
+footer .footer_main .tag{
+    margin: 10px 0;
+}
+
+footer .footer_main .tag img{
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+footer .footer_main .tag p{
+    padding: 0 30px;
+    line-height: 22px;
+    text-align: justify;
+}
+
+footer .footer_main .tag h1{
+    font-size: 25px;
+    margin: 25px 0;
+    color: #000;
+}
+
+footer .footer_main .tag a{
+    display: block;
+    color: black;
+    text-decoration: none;
+    margin: 10px 0;
+}
+footer .footer_main .tag a:hover{
+    color:red;
+}
+footer .footer_main .tag i{
+    margin-right: 10px;
+}
+
+footer .footer_main .tag .social_link{
+    display: flex;
+}
+footer .footer_main .tag .social_link i{
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+footer .footer_main .tag .search_bar{
+    width: 230px;
+    height: 30px;
+    background: rgba(202,202,202);
+    border-radius: 25px;
+}
+
+footer .footer_main .tag .search_bar input{
+    width: 200px;
+    padding: 2px 0;
+    position: relative;
+    top: 17%;
+    left: 6%;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    background: none;
+}
+
+footer .footer_main .tag .search_bar button{
+    padding: 7px 15px;
+    background: #089da1;
+    border: none;
+    margin-top: 15px;
+    border-radius: 25px;
+    color: #fff;
+    cursor: pointer;
+}
+
+footer .end{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    color: #000;
+    margin-top: 30px;
+}
+
+footer .end span{
+    color: #089da1;
+    margin-left: 10px;
+}

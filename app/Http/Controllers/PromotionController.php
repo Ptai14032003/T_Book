@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Session;
 class PromotionController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-        $promotions = Promotion::all();
+        $promotions = Promotion::paginate(10);
         return view('promotions.list', compact('promotions'));
     }
 

@@ -16,7 +16,7 @@ class UserController extends Controller
     //
     public function index(request $request){
         $user = new User;
-        $users = $user::all();
+        $users = $user::paginate(10);
         foreach($users as $user){
             $user->birthday=Carbon::parse($user->birthday)->format('d-m-Y');
         }

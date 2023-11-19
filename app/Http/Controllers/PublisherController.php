@@ -12,7 +12,7 @@ class PublisherController extends Controller
 {
     //
     public function index(){
-        $publishers = Publisher::all();
+        $publishers = Publisher::paginate(10);
         return view('publishers.list',compact('publishers'));
     }
     public function store(Request $request){

@@ -8,7 +8,7 @@
                     Dashboard
                 </a></li>
             /
-            <li><a href="#" class="active">Shop</a></li>
+            <li><a href="#" class="active">T-Book</a></li>
         </ul>
     </div>
 
@@ -20,7 +20,7 @@
         <i class='bx bx-calendar-check'></i>
         <span class="info">
             <h3>
-                1,074
+                {{ $paid_order }}
             </h3>
             <p>Paid Order</p>
         </span>
@@ -28,15 +28,15 @@
     <li><i class='bx bx-group'></i>
         <span class="info">
             <h3>
-                3,944
+                {{ $new_user }}
             </h3>
-            <p>New User</p>
+            <p>New users during the month</p>
         </span>
     </li>
     <li><i class='bx bx-book-alt'></i>
         <span class="info">
             <h3>
-                14,721
+                {{ $book_sold }}
             </h3>
             <p>Books Sold</p>
         </span>
@@ -44,7 +44,7 @@
     <li><i class='bx bx-dollar-circle'></i>
         <span class="info">
             <h3>
-                $6,742
+                {{number_format($total_sales, 0, '', ',')  }}đ
             </h3>
             <p>Total Sales</p>
         </span>
@@ -73,42 +73,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <p>John Doe</p>
-                    </td>
-                    <td>
-                        <img src="images/profile-1.jpg">
-                    </td>
-                    <td>14-03-2003</td>
-                    <td>0787131644</td>
-                    <td>Nam</td>
-                    <td>04-10-2023</td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>John Doe</p>
-                    </td>
-                    <td>
-                        <img src="images/profile-1.jpg">
-                    </td>
-                    <td>14-03-2003</td>
-                    <td>0787131644</td>
-                    <td>Nam</td>
-                    <td>04-10-2023</td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>John Doe</p>
-                    </td>
-                    <td>
-                        <img src="images/profile-1.jpg">
-                    </td>
-                    <td>14-03-2003</td>
-                    <td>0787131644</td>
-                    <td>Nam</td>
-                    <td>04-10-2023</td>
-                </tr>
+                @foreach ($recently_user as $user)
+                    <tr>
+                        <td>
+                            <p>{{ $user->name }}</p>
+                        </td>
+                        <td>
+                            <img src="{{ Storage::url($user->image) }}">
+                        </td>
+                        <td>{{ (new DateTime($user->birthday))->format('d-m-Y') }}</td>
+                        <td>{{ $user->phone_number }}</td>
+                        <td>{{ $user->role == 0 ? 'Nữ' : 'Nam' }}</td>
+                        <td>{{ (new DateTime($user->created_at))->format('d-m-Y') }}</td>
+                    </tr>
+                @endforeach 
             </tbody>
         </table>
     </div>
@@ -130,30 +108,26 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <img src="images/profile-1.jpg">
-                        <p>John Doe</p>
-                    </td>
-                    <td>14-08-2023</td>
-                    <td><span class="status completed">Completed</span></td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="images/profile-1.jpg">
-                        <p>John Doe</p>
-                    </td>
-                    <td>14-08-2023</td>
-                    <td><span class="status pending">Pending</span></td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="images/profile-1.jpg">
-                        <p>John Doe</p>
-                    </td>
-                    <td>14-08-2023</td>
-                    <td><span class="status process">Processing</span></td>
-                </tr>
+                @foreach ($recently_order as $order)
+                    <tr>
+                        <td>
+                            <img src="{{ Storage::url($order->image) }}">
+                            <p>{{ $order->name }}</p>
+                        </td>
+                        <td>{{ (new DateTime($order->created_at))->format('d-m-Y') }}</td>
+                        <td>
+                            @if ($order->delivery == 0 && $order->delivery != 4)
+                                <span class="status pending">Pending</span>
+                            @elseif ($order->delivery == 1 || $order->delivery == 2)
+                                <span class="status process">Processing</span>
+                            @elseif($order->delivery == 3)
+                                <span class="status completed">Completed</span>
+                            @elseif($order->delivery == 4)
+                                <span class="status destroyed">destroyed</span>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -27,7 +27,8 @@ class BookController extends Controller
             ->join('publishers', 'books.publisher_id', '=', 'publishers.id')
             ->select('books.*', 'categories.category_name', 'publishers.publisher_name')
             ->where('books.deleted_at', null)
-            ->get();
+            ->orderBy('books.id', 'desc')
+            ->paginate(10);
         foreach ($books as $book) {
             $id = $book->id;
             $book->author_name = '';
@@ -63,16 +64,19 @@ class BookController extends Controller
                 $params['promotion_price'] = $request->promotion_price;
                 $book = Book::create($params);
                 if ($book->id) {
-                    foreach ($request->list_image as $key => $value) {
-                        $list_images[] = uploadFile('image', $value);
+                    if ($request->list_image) {
+                        foreach ($request->list_image as $key => $value) {
+                            $list_images[] = uploadFile('image', $value);
+                        }
+                        for ($i = 0; $i < count($list_images); $i++) {
+                            $image = [
+                                'image' => $list_images[$i],
+                                'book_id' => $book->id
+                            ];
+                            $images = List_Image::create($image);
+                        }
                     }
-                    for ($i = 0; $i < count($list_images); $i++) {
-                        $image = [
-                            'image' => $list_images[$i],
-                            'book_id' => $book->id
-                        ];
-                        $images = List_Image::create($image);
-                    }
+
                     foreach ($request->author_id as $value) {
                         $participate = [
                             'author_id' => $value,
@@ -161,17 +165,15 @@ class BookController extends Controller
             // cập nhật tác giả viết sách (xóa hết participates -> lưu mới)
             if (!empty($request->author_id)) {
                 $resultDL = DB::table('participates')->where('book_id', $id)->delete();
-                if ($resultDL) {
-                    foreach ($request->author_id as $value) {
-                        $participate = [
-                            'author_id' => $value,
-                            'book_id' => $book->id
-                        ];
-                        $result = Participate::create($participate);
-                    }
+                foreach ($request->author_id as $value) {
+                    $participate = [
+                        'author_id' => $value,
+                        'book_id' => $book->id
+                    ];
+                    $result = Participate::create($participate);
                 }
             }
-            Session::flash('success', "Add Book Successfully");
+            Session::flash('success', "Update Book Successfully");
             return redirect()->route('edit_book', ['id' => $id]);
         }
 
@@ -185,7 +187,13 @@ class BookController extends Controller
         $reviewDL = Review::where('book_id', $id)->delete();
         $participateDL = Participate::where('book_id', $id)->delete();
         $list_imageDL = List_Image::where('book_id', $id)->delete();
-        $order_detailDL = Order_Detail::where('book_id', $id)->delete();
+        $order_detailDL = Order_detail::where('book_id', $id)->delete();
+        $book = Book::find($id);
+        // $resultDL = Storage::delete('/public/' . $book->image);
+        $albums = DB::table('list_images')->where('book_id', $book->id)->get();
+        foreach ($albums as $album) {
+            $album_image_dl = Storage::delete('/public/' . $album->image);
+        }
         $bookDL = Book::where('id', $id)->delete();
         if ($bookDL) {
             Session::flash('success', 'Delete Book Successfully');

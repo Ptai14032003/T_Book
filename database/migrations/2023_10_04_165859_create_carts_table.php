@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('book_id');
             $table->integer('quantity');
+            $table->integer('price');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();
